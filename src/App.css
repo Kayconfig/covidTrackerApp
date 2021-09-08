@@ -19,6 +19,7 @@
 .app__right {
   flex: 0.3;
   margin-left: 0.5rem;
+  height: 100%;
 }
 .app__left {
   flex: 0.7;

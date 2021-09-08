@@ -1,0 +1,12 @@
+.table {
+  height: 50vh;
+  overflow-y: auto;
+  color: #6a5d5d;
+}
+
+.table tr:nth-child(2n + 1) {
+  background-color: #f3f2f8;
+}
+.table__tr {
+  padding: 5rem 0.2rem;
+}

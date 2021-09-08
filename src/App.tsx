@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import InfoBox from "./components/InfoBox";
 import Map from "./components/Map";
+import Table from "./components/Table";
 
 interface CountryInfo {
   todayCases?: number;
@@ -44,6 +45,7 @@ function App() {
               country: countryData.country,
               iso: countryData.countryInfo.iso3,
               flagUrl: countryData.countryInfo.flag,
+              cases: countryData.cases,
             };
           })
         );
@@ -146,7 +148,7 @@ function App() {
       <Card className="app__right">
         <CardContent>
           <h3>Live Cases by Country</h3>
-
+          <Table countries={countries} />
           <h3>Worldwide new cases</h3>
         </CardContent>
       </Card>
