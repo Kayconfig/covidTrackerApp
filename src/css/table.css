@@ -1,12 +1,21 @@
-.table {
+.table__container {
   height: 50vh;
   overflow-y: auto;
+}
+.table {
   color: #6a5d5d;
+  width: 100%;
 }
 
 .table tr:nth-child(2n + 1) {
   background-color: #f3f2f8;
 }
+
+.table tr {
+  margin-top: 0.5rem;
+}
 .table__tr {
-  padding: 5rem 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

@@ -12,6 +12,7 @@ import {
 import InfoBox from "./components/InfoBox";
 import Map from "./components/Map";
 import Table from "./components/Table";
+import LineGraph from "./components/LineGraph";
 
 interface CountryInfo {
   todayCases?: number;
@@ -22,15 +23,20 @@ interface CountryInfo {
   deaths?: number;
 }
 
+interface CountriesInterface {
+  country: string;
+  iso: string;
+  flagUrl: string;
+  cases: number;
+}
+
 function App() {
   const covid_countries_URL = "https://disease.sh/v3/covid-19/countries";
   const worldwide_data_URL = "https://disease.sh/v3/covid-19/all";
   // const country_data_URL = "https://disease.sh/v3/covid-19/countries";
   const default_flag_URL =
     "https://www.worldatlas.com/r/w960-q80/upload/d8/98/26/asia-map.png";
-  const [countries, setCountries] = useState<
-    { country: string; iso: string; flagUrl: string }[]
-  >([]);
+  const [countries, setCountries] = useState<CountriesInterface[]>([]);
   const [country, setCountry] = useState("WW");
   const [flagUrl, setFlagUrl] = useState(default_flag_URL);
   const [countryInfo, setCountryInfo] = useState<CountryInfo>({});
@@ -40,14 +46,19 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         setCountries(
-          data.map((countryData: { [k: string]: any }) => {
-            return {
-              country: countryData.country,
-              iso: countryData.countryInfo.iso3,
-              flagUrl: countryData.countryInfo.flag,
-              cases: countryData.cases,
-            };
-          })
+          data
+            .map((countryData: { [k: string]: any }) => {
+              return {
+                country: countryData.country,
+                iso: countryData.countryInfo.iso3,
+                flagUrl: countryData.countryInfo.flag,
+                cases: countryData.cases,
+              };
+            })
+            .sort(
+              (countryA: CountriesInterface, countryB: CountriesInterface) =>
+                +countryB.cases - +countryA.cases
+            )
         );
       })
       .catch((err) =>
@@ -150,6 +161,7 @@ function App() {
           <h3>Live Cases by Country</h3>
           <Table countries={countries} />
           <h3>Worldwide new cases</h3>
+          <LineGraph />
         </CardContent>
       </Card>
     </div>
