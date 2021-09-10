@@ -1,6 +1,8 @@
 import React, { useEffect, useState, ChangeEvent } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import "leaflet/dist/leaflet.css";
+
 import {
   FormControl,
   MenuItem,
@@ -40,6 +42,12 @@ function App() {
   const [country, setCountry] = useState("WW");
   const [flagUrl, setFlagUrl] = useState(default_flag_URL);
   const [countryInfo, setCountryInfo] = useState<CountryInfo>({});
+  const [mapCenter, setMapCenter] = useState([10, 8]);
+  const [mapZoom, setMapZoom] = useState(8);
+  //I added this useState to force the map to rerender
+  // const [mapUrl, setMapUrl] = useState(
+  //   "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+  // );
   //useEffect to get countries
   useEffect(() => {
     fetch(covid_countries_URL)
@@ -93,7 +101,14 @@ function App() {
     await fetch(url)
       .then((res) => res.json())
       .then((data) => {
+        //set country info
         setCountryInfo(data);
+        //set the longitude and latitude of map
+        const latLong = [data.countryInfo.lat, data.countryInfo.long];
+        // alert(latLong);
+        setMapCenter(latLong);
+        setMapZoom(4);
+        setMapUrl("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png");
       })
       .catch((err) => {
         alert(`Unable to get ${country} data`);
@@ -152,7 +167,7 @@ function App() {
           />
         </div>
         <div className="app__map">
-          <Map />
+          <Map center={mapCenter} zoom={mapZoom} />
         </div>
       </div>
 
