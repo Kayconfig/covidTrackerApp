@@ -108,7 +108,6 @@ function App() {
         // alert(latLong);
         setMapCenter(latLong);
         setMapZoom(4);
-        setMapUrl("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png");
       })
       .catch((err) => {
         alert(`Unable to get ${country} data`);
