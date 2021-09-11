@@ -1,5 +1,5 @@
-import React, { useEffect, useState, ChangeEvent } from "react";
-import logo from "./logo.svg";
+import { useEffect, useState, ChangeEvent } from "react";
+
 import "./App.css";
 import "leaflet/dist/leaflet.css";
 

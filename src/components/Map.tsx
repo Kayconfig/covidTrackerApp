@@ -74,6 +74,7 @@ const Map: FC<Props> = ({ center, zoom, countries }) => {
       <MapContainer
         center={center as LatLngExpression}
         zoom={zoom}
+        scrollWheelZoom={false}
         whenCreated={setMap}
       >
         <TileLayer
@@ -81,11 +82,6 @@ const Map: FC<Props> = ({ center, zoom, countries }) => {
           url={`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`}
         />
         {showDataOnMap(countries)}
-        {/* <Marker position={center as LatLngExpression}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker> */}
       </MapContainer>
     </div>
   );

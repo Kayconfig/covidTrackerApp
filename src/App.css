@@ -11,8 +11,15 @@
 }
 
 @media (max-width: 990px) {
-  .App {
+  .App,
+  .app__stats {
     flex-direction: column;
+  }
+  .app__stats > * {
+    margin-bottom: 0.5rem;
+  }
+  h1 {
+    font-size: 2rem;
   }
 }
 
@@ -36,7 +43,6 @@
 .app__stats {
   padding: 0.5rem 1rem;
   display: flex;
-  align-items: center;
 }
 
 .app__stats > * {
