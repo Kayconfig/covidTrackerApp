@@ -1,7 +1,6 @@
-# COVID 19 TRACKER APPLICATION USING REACT
+# COVID 19 TRACKER APPLICATION USING REACT( TYPESCRIPT)
 
 This project can be used to visualize updated covid-19 statistics
-Language: Typescript
 
 ## Available Scripts
 
