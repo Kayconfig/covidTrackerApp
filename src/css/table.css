@@ -1,6 +1,9 @@
 .table__container {
-  height: 50vh;
-  overflow-y: auto;
+  height: 40vh;
+  overflow-y: scroll;
+  padding-bottom: 0.5rem;
+  /* border-bottom: 1px solid #6a5d5d; */
+  box-shadow: 0 0 8px -4px #6a5d5d;
 }
 .table {
   color: #6a5d5d;

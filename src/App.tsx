@@ -30,6 +30,9 @@ interface CountriesInterface {
   iso: string;
   flagUrl: string;
   cases: number;
+  deaths: number;
+  recovered: number;
+  countryInfo: any;
 }
 
 function App() {
@@ -43,7 +46,7 @@ function App() {
   const [flagUrl, setFlagUrl] = useState(default_flag_URL);
   const [countryInfo, setCountryInfo] = useState<CountryInfo>({});
   const [mapCenter, setMapCenter] = useState([10, 8]);
-  const [mapZoom, setMapZoom] = useState(8);
+  const [mapZoom, setMapZoom] = useState(3);
   //I added this useState to force the map to rerender
   // const [mapUrl, setMapUrl] = useState(
   //   "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -61,6 +64,9 @@ function App() {
                 iso: countryData.countryInfo.iso3,
                 flagUrl: countryData.countryInfo.flag,
                 cases: countryData.cases,
+                deaths: countryData.deaths,
+                recovered: countryData.recovered,
+                countryInfo: countryData.countryInfo,
               };
             })
             .sort(
@@ -166,7 +172,7 @@ function App() {
           />
         </div>
         <div className="app__map">
-          <Map center={mapCenter} zoom={mapZoom} />
+          <Map center={mapCenter} zoom={mapZoom} countries={countries} />
         </div>
       </div>
 
@@ -175,7 +181,7 @@ function App() {
           <h3>Live Cases by Country</h3>
           <Table countries={countries} />
           <h3>Worldwide new cases</h3>
-          <LineGraph />
+          <LineGraph casesType="cases" />
         </CardContent>
       </Card>
     </div>

@@ -1,5 +1,6 @@
 .map {
-  height: 500px;
+  height: 30rem;
+  flex: 1;
   background-color: white;
   padding: 1rem;
   border-radius: 20px;
@@ -9,4 +10,9 @@
 
 .map .leaflet-container {
   height: 100%;
+}
+
+.info-flag img {
+  width: 100px;
+  border-radius: 5px;
 }
