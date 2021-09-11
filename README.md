@@ -1,10 +1,7 @@
 # COVID 19 TRACKER APPLICATION USING REACT
 
 This project can be used to visualize updated covid-19 statistics
-
-## Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Language: Typescript
 
 ## Available Scripts
 
