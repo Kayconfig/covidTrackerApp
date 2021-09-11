@@ -27,8 +27,6 @@ interface CountryInfo {
 
 interface CountriesInterface {
   country: string;
-  iso: string;
-  flagUrl: string;
   cases: number;
   deaths: number;
   recovered: number;
@@ -47,10 +45,7 @@ function App() {
   const [countryInfo, setCountryInfo] = useState<CountryInfo>({});
   const [mapCenter, setMapCenter] = useState([10, 8]);
   const [mapZoom, setMapZoom] = useState(3);
-  //I added this useState to force the map to rerender
-  // const [mapUrl, setMapUrl] = useState(
-  //   "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-  // );
+
   //useEffect to get countries
   useEffect(() => {
     fetch(covid_countries_URL)
@@ -61,8 +56,6 @@ function App() {
             .map((countryData: { [k: string]: any }) => {
               return {
                 country: countryData.country,
-                iso: countryData.countryInfo.iso3,
-                flagUrl: countryData.countryInfo.flag,
                 cases: countryData.cases,
                 deaths: countryData.deaths,
                 recovered: countryData.recovered,
@@ -138,8 +131,8 @@ function App() {
                   return (
                     <MenuItem
                       key={index}
-                      value={country.iso}
-                      onClick={() => setFlagUrl(country.flagUrl)}
+                      value={country.countryInfo.iso}
+                      onClick={() => setFlagUrl(country.countryInfo.flagUrl)}
                     >
                       {country.country}
                     </MenuItem>
