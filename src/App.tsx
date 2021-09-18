@@ -1,4 +1,4 @@
-import { useEffect, useState, ChangeEvent } from "react";
+import { useEffect, useState, ChangeEvent, useRef } from "react";
 
 import "./App.css";
 import "leaflet/dist/leaflet.css";
@@ -36,7 +36,6 @@ interface CountriesInterface {
 function App() {
   const covid_countries_URL = "https://disease.sh/v3/covid-19/countries";
   const worldwide_data_URL = "https://disease.sh/v3/covid-19/all";
-  // const country_data_URL = "https://disease.sh/v3/covid-19/countries";
   const default_flag_URL =
     "https://www.worldatlas.com/r/w960-q80/upload/d8/98/26/asia-map.png";
   const [countries, setCountries] = useState<CountriesInterface[]>([]);
@@ -54,12 +53,13 @@ function App() {
         setCountries(
           data
             .map((countryData: { [k: string]: any }) => {
+              console.log(countryData.countryInfo);
               return {
                 country: countryData.country,
                 cases: countryData.cases,
                 deaths: countryData.deaths,
                 recovered: countryData.recovered,
-                countryInfo: countryData.countryInfo,
+                countryInfo: { ...countryData.countryInfo },
               };
             })
             .sort(
@@ -89,10 +89,8 @@ function App() {
       value: unknown;
     }>
   ) => {
-    console.log("handle says:", event.target.value);
     setCountry(event.target.value as string);
     //GET DATA FOR THE SELECTED COUNTRY
-    console.log("logger says:", event.target.value);
     const url =
       event.target.value === "WW"
         ? worldwide_data_URL
@@ -131,8 +129,8 @@ function App() {
                   return (
                     <MenuItem
                       key={index}
-                      value={country.countryInfo.iso}
-                      onClick={() => setFlagUrl(country.countryInfo.flagUrl)}
+                      value={country.countryInfo.iso2}
+                      onClick={() => setFlagUrl(country.countryInfo.flag)}
                     >
                       {country.country}
                     </MenuItem>
