@@ -1,6 +1,6 @@
 # COVID 19 TRACKER APPLICATION USING REACT( TYPESCRIPT)
 
-This project can be used to visualize updated covid-19 statistics
+This project can be used to visualize covid-19 statistics like number of covid-19 cases, recoveries and deaths. Stats data is from disease.sh
 
 ## Available Scripts
 
