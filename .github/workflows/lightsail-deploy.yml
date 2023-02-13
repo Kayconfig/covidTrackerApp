@@ -1,0 +1,33 @@
+name: Deploy to Lightsail
+
+on:
+  push:
+    branches:
+      - dev
+
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build and deploy
+      env:
+        CODE_DIRECTORY: .
+        BUILD_COMMAND: npm run build
+        BUILD_ARTIFACT_DIRECTORY: build
+        BUCKET_NAME: strapi-backend-bucket-1
+        INSTANCE_NAME: Node-js-1
+        DEPLOYMENT_SCRIPT: deploy.sh
+        ARGUMENTS: <arguments>
+      run: |
+        cd ${CODE_DIRECTORY}
+        ${BUILD_COMMAND}
+        aws s3 cp ${BUILD_ARTIFACT_DIRECTORY} s3://${BUCKET_NAME}/${BUILD_ARTIFACT_DIRECTORY}
+        aws lightsail run-command --instance-name ${INSTANCE_NAME} --command-name execute-script --script-name ${DEPLOYMENT_SCRIPT} --arguments ${ARGUMENTS}
