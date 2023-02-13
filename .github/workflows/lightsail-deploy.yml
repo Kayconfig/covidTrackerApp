@@ -1,6 +1,7 @@
 name: Deploy to Lightsail
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - dev
