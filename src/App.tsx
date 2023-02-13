@@ -81,7 +81,7 @@ function App() {
       .catch((err) => {
         alert(`Unable to get ${country} data`);
       });
-  }, []);
+  }, [country]);
 
   const handleCountry = async (
     event: ChangeEvent<{
