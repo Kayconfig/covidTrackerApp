@@ -29,6 +29,7 @@ jobs:
         ARGUMENTS: <arguments>
       run: |
         cd ${CODE_DIRECTORY}
+        npm run install
         ${BUILD_COMMAND}
         aws s3 cp ${BUILD_ARTIFACT_DIRECTORY} s3://${BUCKET_NAME}/${BUILD_ARTIFACT_DIRECTORY}
         aws lightsail run-command --instance-name ${INSTANCE_NAME} --command-name execute-script --script-name ${DEPLOYMENT_SCRIPT} --arguments ${ARGUMENTS}
